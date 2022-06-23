@@ -14,7 +14,7 @@ export const Post: React.FC<PostType> = (props) => {
                 alt=""/>
             {props.message}
             <div>
-                <span>{props.likes}</span>
+                <span>likes</span> {props.likes}
             </div>
         </div>
     )
