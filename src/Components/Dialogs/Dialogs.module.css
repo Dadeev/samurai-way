@@ -1,18 +1,26 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 1fr 2fr 10fr;
 }
 
 .dialogsItems {
+    display: grid;
     padding: 10px;
+    align-items: center;
+    gap: 27px;
 }
 
 .dialogsItems .active {
+    text-decoration: none;
     color: gold;
 }
 
 .messages {
     padding: 10px;
+    display: grid;
+    align-items: center;
+    gap: 27px;
+    max-width: max-content;
 }
 
 .messages .message {

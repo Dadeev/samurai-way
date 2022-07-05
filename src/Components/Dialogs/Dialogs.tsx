@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItme";
 import {Message} from "./Message/Message";
 import {dialogsDataType, DialogsPageType, messagesDataType, postDataType, stateType} from "../redux/state";
+import {MessageAvatars} from "./Message/MessageAvatars/MessageAvatars";
 
 
 type DialogsType = {
@@ -16,6 +17,7 @@ export const Dialogs = (props: DialogsType) => {
 
     return (
         <div className={s.dialogs}>
+            <MessageAvatars/>
             <div className={s.dialogsItems}>
                 {dialogsElems}
             </div>
