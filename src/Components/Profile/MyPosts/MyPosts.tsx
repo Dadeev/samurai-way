@@ -5,14 +5,16 @@ import {Post} from "./Post/Post";
 type postDataType = {
     id: number
     message: string
-    likes: number
+    likesCount: number
 }
 
 export const MyPosts = () => {
-    let postData: postDataType[] = [
-        {id: 1, message: 'Hi, how are you?', likes: 15},
-        {id: 1, message: 'It\'s my first post', likes: 20}
+    const posts: postDataType[] = [
+        {id: 1, message: 'Hi, how are you?', likesCount: 15},
+        {id: 2, message: 'It\'s my first post', likesCount: 20}
     ]
+
+    const postsElems = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -26,11 +28,7 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                {postData.map((el) => {
-                    return (
-                        <Post key={el.id} message={el.message} likes={el.likes}/>
-                    )
-                })}
+                {postsElems}
             </div>
         </div>
     )

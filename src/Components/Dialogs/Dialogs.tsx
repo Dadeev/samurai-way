@@ -1,30 +1,7 @@
 import React from 'react'
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-
-type DialogItemType = {
-    name: string
-    id: number
-}
-
-const DialogItem: React.FC<DialogItemType> = (props) => {
-    let path = '/dialogs/' + props.id;
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-type MessageType = {
-    message: string
-}
-
-const Message: React.FC<MessageType> = (props) => {
-    return (
-        <div className={s.message}>{props.message}</div>
-    )
-}
+import {DialogItem} from "./DialogItem/DialogItme";
+import {Message} from "./Message/Message";
 
 type dialogsDataType = {
     id: number
@@ -35,9 +12,10 @@ type messagesDataType = {
     id: number
     message: string
 }
+
 export const Dialogs = () => {
 
-    let dialogsData: dialogsDataType[] = [
+    const dialogs: dialogsDataType[] = [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Andrey'},
         {id: 3, name: 'Sveta'},
@@ -46,7 +24,7 @@ export const Dialogs = () => {
         {id: 6, name: 'Valera'},
     ]
 
-    let messagesData: messagesDataType[] = [
+    const messages: messagesDataType[] = [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'How is your It-camasutra?'},
         {id: 3, message: 'Yo'},
@@ -55,21 +33,16 @@ export const Dialogs = () => {
         {id: 6, message: 'it incubator!'},
     ]
 
+    const dialogsElems = dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    const messagesElems = messages.map(m => <Message key={m.id} message={m.message}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dialogsData.map((el) => {
-                    return (
-                        <DialogItem key={el.id} name={el.name} id={el.id}/>
-                    )
-                })}
+                {dialogsElems}
             </div>
             <div className={s.messages}>
-                {messagesData.map((el) => {
-                    return (
-                        <Message key={el.id} message={el.message}/>
-                    )
-                })}
+                {messagesElems}
             </div>
         </div>
     )
