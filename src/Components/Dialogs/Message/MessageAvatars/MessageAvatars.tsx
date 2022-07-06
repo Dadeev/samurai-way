@@ -14,7 +14,7 @@ export const MessageAvatars = () => {
         {id: 6, avatar: 'https://android-obzor.com/wp-content/uploads/2022/03/1-20.jpg'}
     ]
 
-    let styleForAvatars = {width: '45px', height: '45px', borderRadius: '50%', padding: '10px', marginLeft: '5px'}
+    const styleForAvatars = {width: '45px', height: '45px', borderRadius: '50%', padding: '10px', marginLeft: '5px'}
 
     const avatarsForPeople = avatars.map(a => <img key={a.id} src={a.avatar} alt="" style={styleForAvatars}/>)
 

@@ -1,0 +1,21 @@
+.textFriends {
+    font-size: 35px;
+    color: white;
+    margin-top: 120px;
+    letter-spacing: 0.3px;
+}
+
+.avatars {
+    display: flex;
+    padding-top: 10px;
+    gap: 11px;
+
+}
+
+.textNameFriends {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    padding-top: 5px;
+    color: white;
+}
