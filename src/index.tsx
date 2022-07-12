@@ -1,17 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import {state} from "./Components/redux/state";
+import {addPost, state, stateType} from "./Components/redux/state";
+import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
+import App from "./App";
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App state={state}/>
-    </BrowserRouter>,
-    document.getElementById('root')
-);
 
+export const renderTree = (state: stateType) => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App state={state} addPost={addPost}/>
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+}
+
+renderTree(state)
 // import openGoogle from './..google.js';
 // import openYandex from './yandex.js';
 // import openAllMaps from './libraries/maps.js'

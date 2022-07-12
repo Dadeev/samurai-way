@@ -20,7 +20,7 @@ export const MessageAvatars = () => {
 
     return (
         <div>
-            {avatarsForPeople}
+            <div className={s.avatars}>{avatarsForPeople}</div>
         </div>
     )
 }

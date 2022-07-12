@@ -1,3 +1,5 @@
+import {renderTree} from "../../index";
+
 export type postDataType = {
     id: number
     message: string
@@ -19,7 +21,6 @@ export type newFriendsNamesType = {
     id: number
     name: string
 }
-
 
 export type stateType = {
     profilePage: ProfilePageType
@@ -78,4 +79,13 @@ export const state: stateType = {
             {id: 3, name: 'Andrey'}
         ]
     }
+}
+export let addPost = (postMessage: string) => {
+    let newPost:postDataType = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    renderTree(state)
 }

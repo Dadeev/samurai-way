@@ -16,9 +16,9 @@
 }
 
 .messages {
-    padding: 10px;
     display: grid;
     align-items: center;
+    padding: 10px;
     gap: 27px;
     max-width: max-content;
 }
