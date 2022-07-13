@@ -1,4 +1,4 @@
-import {renderTree} from "../../index";
+import {renderTree} from "../../renderTree";
 
 export type postDataType = {
     id: number

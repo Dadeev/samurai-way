@@ -16,19 +16,18 @@ export const MyPosts = (props: myPostType) => {
     let postMessageRef = React.createRef<HTMLTextAreaElement>()
 
     const AddPostHandler = () => {
-        // if (postMessageRef.current) {
-        //     props.addPost(postMessageRef.current.value)
-        // }
-        alert('hello')
+        if (postMessageRef.current) {
+            props.addPost(postMessageRef.current.value)
+            postMessageRef.current.value = ''
+        }
     }
-
 
     return (
         <div className={s.postsBlock}>
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={postMessageRef}></textarea>
                 </div>
                 <div>
                     <button onClick={AddPostHandler}>Add post</button>

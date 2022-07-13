@@ -4,11 +4,11 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import React from "react";
 
-// export const renderTree = (state: stateType) => {
-//     ReactDOM.render(
-//         <BrowserRouter>
-//             <App state={state} addPost={addPost}/>
-//         </BrowserRouter>,
-//         document.getElementById('root')
-//     );
-// }
+export const renderTree = (state: stateType) => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App state={state} addPost={addPost}/>
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+}
