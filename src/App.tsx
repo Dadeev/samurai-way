@@ -12,7 +12,8 @@ import {postDataType, stateType} from "./Components/redux/state";
 
 type AppType = {
     state: stateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: AppType) {
@@ -22,7 +23,10 @@ function App(props: AppType) {
             <Navbar state={props.state.siteBarPage}/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/profile' element={<Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
+                    <Route path='/profile'
+                           element={<Profile profilePage={props.state.profilePage} addPost={props.addPost}
+                                             newPostText={props.state.profilePage.newPostText}
+                                             updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path='/dialogs*' element={<Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

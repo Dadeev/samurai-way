@@ -29,6 +29,7 @@ export type stateType = {
 }
 export type ProfilePageType = {
     posts: postDataType[]
+    newPostText: string
 }
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
@@ -44,7 +45,8 @@ export const state: stateType = {
         posts: [
             {id: 1, message: 'Hi, how are you?', likesCount: 15},
             {id: 2, message: 'It\'s my first post', likesCount: 20}
-        ]
+        ],
+        newPostText: '123'
     },
     dialogsPage: {
         dialogs: [
@@ -80,12 +82,18 @@ export const state: stateType = {
         ]
     }
 }
-export let addPost = (postMessage: string) => {
-    let newPost:postDataType = {
+export let addPost = () => {
+    let newPost: postDataType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    renderTree(state)
+}
+
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     renderTree(state)
 }

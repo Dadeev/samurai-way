@@ -6,7 +6,9 @@ import {postDataType} from "../../redux/state";
 
 type myPostType = {
     posts: postDataType[]
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 export const MyPosts = (props: myPostType) => {
@@ -16,10 +18,11 @@ export const MyPosts = (props: myPostType) => {
     let postMessageRef = React.createRef<HTMLTextAreaElement>()
 
     const AddPostHandler = () => {
-        if (postMessageRef.current) {
-            props.addPost(postMessageRef.current.value)
-            postMessageRef.current.value = ''
-        }
+        props.addPost()
+    }
+
+    const onPostChange = () => {
+        props.updateNewPostText(postMessageRef.current!.value); // использовал '!' знак, т.к писало - object is possibly null
     }
 
     return (
@@ -27,7 +30,7 @@ export const MyPosts = (props: myPostType) => {
             <h3>My post</h3>
             <div>
                 <div>
-                    <textarea ref={postMessageRef}></textarea>
+                    <textarea onChange={onPostChange} ref={postMessageRef} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={AddPostHandler}>Add post</button>
