@@ -1,4 +1,7 @@
-import {renderTree} from "../../renderTree";
+// import {renderTree} from "../../renderTree";
+let renderTree = (state: stateType) => {
+    console.log('State changed')
+}
 
 export type postDataType = {
     id: number
@@ -82,7 +85,7 @@ export const state: stateType = {
         ]
     }
 }
-export let addPost = () => {
+export const addPost = () => {
     let newPost: postDataType = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -93,7 +96,11 @@ export let addPost = () => {
     renderTree(state)
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     renderTree(state)
+}
+
+export const subscribe = (observer: (state: stateType) => void) => {
+    renderTree = observer
 }
