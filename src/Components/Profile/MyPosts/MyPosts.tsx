@@ -1,7 +1,7 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ActionsTypes, postDataType} from "../../redux/state";
+import {ActionsTypes, addPostAC, postDataType, UpdateNewPostTextAC} from "../../redux/state";
 
 
 type myPostType = {
@@ -17,12 +17,12 @@ export const MyPosts = (props: myPostType) => {
     let postMessageRef = React.createRef<HTMLTextAreaElement>()
 
     const AddPostHandler = () => {
-        props.dispatch({type : "ADD-POST"})
+        props.dispatch(addPostAC())
     }
 
     const onPostChange = () => {
         let text = postMessageRef.current!.value // использовал '!' знак, т.к писало - object is possibly null
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text});
+        props.dispatch(UpdateNewPostTextAC(text));
     }
 
     return (

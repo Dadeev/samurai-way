@@ -1,4 +1,6 @@
 // import {renderTree} from "../../renderTree";
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
 export type postDataType = {
     id: number
@@ -90,15 +92,7 @@ export type StoreType = {
     getState: () => stateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = AddPostActionType | UpdatePostActionType
-
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type UpdatePostActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
 
 export let store: StoreType = {
     _state: {
@@ -155,7 +149,7 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost: postDataType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -164,9 +158,12 @@ export let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
         }
     }
 }
+
+export const addPostAC = () => ({type: ADD_POST} as const)
+export const UpdateNewPostTextAC = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
