@@ -7,11 +7,11 @@ import {
     dialogsDataType,
     DialogsPageType,
     messagesDataType,
-    postDataType, sendMessageCreator,
-    stateType, StoreType,
-    updateNewMessageBodyCreator
+    postDataType,
+    stateType, StoreType
 } from "../redux/state";
 import {MessageAvatars} from "./Message/MessageAvatars/MessageAvatars";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-reducer";
 
 type DialogsType = {
     store: StoreType
