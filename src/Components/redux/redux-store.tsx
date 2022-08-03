@@ -2,6 +2,7 @@ import {combineReducers, createStore} from "redux";
 import profileReducer, {addPostAC, UpdateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+
 export type postDataType = {
     id: number
     message: string
