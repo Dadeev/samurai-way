@@ -4,16 +4,17 @@ import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {ActionsTypes, postDataType, stateType, StoreType} from "./Components/redux/state";
+import {Store} from "redux";
+import {ActionsTypes, RootStateType} from "./Components/redux/redux-store";
 
 type AppType = {
-    state: stateType
+    state: RootStateType
     dispatch: (action: ActionsTypes) => void
-    store: StoreType
+    store: Store
 }
 
 function App(props: AppType) {

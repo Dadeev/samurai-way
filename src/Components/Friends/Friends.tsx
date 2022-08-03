@@ -1,6 +1,6 @@
 import React from 'react'
-import {siteBarPageType} from "../redux/state";
 import s from './Friends.module.css'
+import {siteBarPageType} from "../redux/redux-store";
 
 type FriendsType = {
     siteBarPage: siteBarPageType

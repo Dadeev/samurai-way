@@ -2,7 +2,8 @@ import React from "react";
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import {Friends} from "../Friends/Friends";
-import {siteBarPageType} from "../redux/state";
+import {siteBarPageType} from "../redux/redux-store";
+
 
 type NavbarType = {
     state: siteBarPageType
