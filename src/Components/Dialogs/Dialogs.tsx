@@ -3,12 +3,11 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItme";
 import {Message} from "./Message/Message";
 import {MessageAvatars} from "./Message/MessageAvatars/MessageAvatars";
-import {Store} from "redux";
-import {DialogsPageType, RootStateType} from "../redux/redux-store";
+import {DialogsPageType} from "../redux/redux-store";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
-    sendMessageClick: () => void
+    sendMessage: () => void
     dialogsPage: DialogsPageType
 }
 
@@ -22,7 +21,7 @@ export const Dialogs = (props: DialogsType) => {
 
 
     const onSendMessageClick = () => {
-        props.sendMessageClick()
+        props.sendMessage()
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value;
