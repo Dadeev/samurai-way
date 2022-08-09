@@ -6,20 +6,12 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 
-const renderTree = (state: RootStateType) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App state={state}/>
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
-renderTree(store.getState())
-
-store.subscribe(() => {
-    let state = store.getState();
-    renderTree(state)
-})
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App state={store.getState()}/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+);
 
