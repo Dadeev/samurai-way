@@ -9,6 +9,7 @@ import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {RootStateType} from "./Components/redux/redux-store";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./Components/Users/UsersContainer";
 
 type AppType = {
     state: RootStateType
@@ -27,6 +28,7 @@ function App(props: AppType) {
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/users' element={<UsersContainer/>}/>
                 </Routes>
             </div>
         </div>
