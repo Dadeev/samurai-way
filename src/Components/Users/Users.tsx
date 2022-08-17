@@ -12,13 +12,6 @@ type UserPropsType = {
 }
 
 export const Users = (props: UserPropsType) => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
-    }
-
     //     [{
     //     id: 1,
     //     photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',
@@ -43,7 +36,14 @@ export const Users = (props: UserPropsType) => {
     //         status: 'Im a boss too',
     //         location: {city: 'Kiev', country: 'Ukraine'}
     //     },]
-
+    const getUsersHandler = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
+    }
     const mapedUsers = props.users.map(u =>
         <div key={u.id}>
                 <span>
@@ -70,6 +70,7 @@ export const Users = (props: UserPropsType) => {
 
     return (
         <>
+            <button onClick={getUsersHandler}>Get users</button>
             {mapedUsers}
         </>
     )
