@@ -11,7 +11,7 @@ type UserPropsType = {
     setUsers: (users: UserType[]) => void
 }
 
-export const Users = (props: UserPropsType) => {
+export class Users extends React.Component<UserPropsType> {
     //     [{
     //     id: 1,
     //     photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',
@@ -36,27 +36,30 @@ export const Users = (props: UserPropsType) => {
     //         status: 'Im a boss too',
     //         location: {city: 'Kiev', country: 'Ukraine'}
     //     },]
-    const getUsersHandler = () => {
-        if (props.users.length === 0) {
+    constructor(props:UserPropsType) {
+        super(props);
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
                 .then(response => {
-                    props.setUsers(response.data.items)
+                    this.props.setUsers(response.data.items)
                 })
-        }
     }
-    const mapedUsers = props.users.map(u =>
-        <div key={u.id}>
+    render() {
+        return (
+            <>
+                {
+                    this.props.users.map(u =>
+                        <div key={u.id}>
                 <span>
                     <div>
                         {/*<img src={u.photos.small == null ? u.photos.small : userPhoto} className={s.photo}/>*/}
                         <img src={userPhoto} className={s.photo}/>
                     </div>
                     <div>
-                        {u.followed ? <button onClick={() => props.unfollow(u.id)}>UnFollow</button> :
-                            <button onClick={() => props.follow(u.id)}>Follow</button>}
+                        {u.followed ? <button onClick={() => this.props.unfollow(u.id)}>UnFollow</button> :
+                            <button onClick={() => this.props.follow(u.id)}>Follow</button>}
                     </div>
                 </span>
-            <span>
+                            <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
@@ -66,12 +69,9 @@ export const Users = (props: UserPropsType) => {
                         <div>{'u.location.country'}</div>
                     </span>
                 </span>
-        </div>)
-
-    return (
-        <>
-            <button onClick={getUsersHandler}>Get users</button>
-            {mapedUsers}
-        </>
-    )
+                        </div>)
+                }
+            </>
+        )
+    }
 }
