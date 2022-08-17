@@ -35,16 +35,14 @@ export class Users extends React.Component<UserPropsType> {
     //         fullName: 'Sasha',
     //         status: 'Im a boss too',
     //         location: {city: 'Kiev', country: 'Ukraine'}
-    //     },]
-    constructor(props:UserPropsType) {
-        super(props);
-        if (this.props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                })
-        }
+    //     }
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
+
     render() {
         return (
             <>
