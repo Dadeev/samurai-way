@@ -2,7 +2,15 @@ import {combineReducers, createStore} from "redux";
 import profileReducer, {addPostAC, UpdateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC, usersReducer} from "./users-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setToggleFetchingAC,
+    setUsersAC,
+    setUsersTotalCountAC,
+    unfollowAC,
+    usersReducer
+} from "./users-reducer";
 
 export type postDataType = {
     id: number
@@ -50,6 +58,7 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setUsersTotalCountAC>
+    | ReturnType<typeof setToggleFetchingAC>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
