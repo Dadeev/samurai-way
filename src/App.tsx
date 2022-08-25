@@ -23,8 +23,9 @@ function App(props: AppType) {
             <Navbar state={props.state.siteBarPage}/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/profile/*'
+                    <Route path='/profile/:userId'
                            element={<ProfileContainer/>}/>
+                    <Route path='/profile' element={<ProfileContainer />} />
                     <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
