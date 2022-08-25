@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./UsersAPI.module.css";
 import userPhoto from "../../assets/images/user-image-icon-19.jpg";
 import {UserType} from "../redux/users-reducer";
+import {NavLink} from "react-router-dom";
 
 type UsersType = {
     totalUsersCount: number
@@ -19,6 +20,12 @@ export const Users = (props: UsersType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <>
             <div>
@@ -32,8 +39,10 @@ export const Users = (props: UsersType) => {
                     <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={'/profile/' + u.id}>
                         {/*<img src={u.photos.small == null ? u.photos.small : userPhoto} className={s.photo}/>*/}
-                        <img src={userPhoto} className={s.photo}/>
+                            <img src={userPhoto} className={s.photo}/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed ? <button onClick={() => props.unfollow(u.id)}>UnFollow</button> :

@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, setUserProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
@@ -9,8 +9,9 @@ import {
     setUsers,
     setTotalUsersCount,
     unfollow,
-    usersReducer
+    usersReducer, ProfileUsersType
 } from "./users-reducer";
+import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
 
 export type postDataType = {
     id: number
@@ -37,6 +38,7 @@ export type newFriendsNamesType = {
 export type ProfilePageType = {
     posts: postDataType[]
     newPostText: string
+    profile: ProfileType
 }
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
@@ -59,6 +61,7 @@ export type ActionsTypes =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setToggleFetching>
+    | ReturnType<typeof setUserProfile>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -70,3 +73,6 @@ let reducers = combineReducers({
 export type RootStateType = ReturnType<typeof store.getState>
 
 export let store = createStore(reducers)
+
+// @ts-ignore
+window.store = store
