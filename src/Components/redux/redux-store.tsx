@@ -3,12 +3,12 @@ import profileReducer, {addPostAC, UpdateNewPostTextAC} from "./profile-reducer"
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setToggleFetchingAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setToggleFetching,
+    setUsers,
+    setTotalUsersCount,
+    unfollow,
     usersReducer
 } from "./users-reducer";
 
@@ -53,12 +53,12 @@ export type ActionsTypes =
     | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
-    | ReturnType<typeof setToggleFetchingAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof setToggleFetching>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
