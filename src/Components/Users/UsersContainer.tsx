@@ -27,6 +27,7 @@ type UserAPIPropsType = {
     isFetching: boolean
     setToggleFetching: (isFetching: boolean) => void
 }
+
 class UsersAPI extends React.Component<UserAPIPropsType> {
     //     [{
     //     id: 1,
@@ -54,7 +55,8 @@ class UsersAPI extends React.Component<UserAPIPropsType> {
     //     }
     componentDidMount() {
         this.props.setToggleFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.setToggleFetching(false)
                 this.props.setUsers(response.data.items)
@@ -65,7 +67,8 @@ class UsersAPI extends React.Component<UserAPIPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setToggleFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.setToggleFetching(false)
                 this.props.setUsers(response.data.items)
