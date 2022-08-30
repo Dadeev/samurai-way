@@ -6,3 +6,20 @@
 header img {
     width: 20px;
 }
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.loginNameBlock {
+    float: right;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #ede1f3;
+}

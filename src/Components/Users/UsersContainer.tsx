@@ -27,7 +27,7 @@ type UserAPIPropsType = {
     isFetching: boolean
     setToggleFetching: (isFetching: boolean) => void
 }
-export class UsersAPI extends React.Component<UserAPIPropsType> {
+class UsersAPI extends React.Component<UserAPIPropsType> {
     //     [{
     //     id: 1,
     //     photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',

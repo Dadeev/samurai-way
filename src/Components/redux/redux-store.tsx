@@ -12,6 +12,7 @@ import {
     usersReducer, ProfileUsersType
 } from "./users-reducer";
 import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
+import {authReducer, setAuthUserData} from "./auth-reducer";
 
 export type postDataType = {
     id: number
@@ -62,12 +63,14 @@ export type ActionsTypes =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setToggleFetching>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setAuthUserData>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     siteBarPage: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 export type RootStateType = ReturnType<typeof store.getState>
