@@ -9,7 +9,7 @@ import {
     setUsers,
     setTotalUsersCount,
     unfollow,
-    usersReducer, ProfileUsersType
+    usersReducer, ProfileUsersType, toggleFollowingProgress
 } from "./users-reducer";
 import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
 import {authReducer, setAuthUserData} from "./auth-reducer";
@@ -64,6 +64,7 @@ export type ActionsTypes =
     | ReturnType<typeof setToggleFetching>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
 
 let reducers = combineReducers({
     profilePage: profileReducer,
