@@ -4,10 +4,10 @@ import {Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
 import {DialogsPageType, RootStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
+import {withAuthNavigate} from "../hoc/withAuthNavigate";
 
 type MapStateToPropsType = {
     dialogsPage: DialogsPageType
-    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     updateNewMessageBody: (body: string) => void
@@ -16,7 +16,6 @@ type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
     dialogsPage: state.dialogsPage,
-    isAuth: state.auth.isAuth
 })
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
     updateNewMessageBody: (body: string) => {
@@ -27,4 +26,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
     }
 })
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const AuthNavigateComponent = withAuthNavigate(Dialogs)
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthNavigateComponent)

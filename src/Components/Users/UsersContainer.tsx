@@ -7,6 +7,7 @@ import {
 } from "../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {withAuthNavigate} from "../hoc/withAuthNavigate";
 
 type UserAPIPropsType = {
     users: UserType[]
@@ -89,6 +90,6 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
     followingProgress: state.usersPage.followingProgress
 })
 
-export const UsersContainer = connect(mapStateToProps, {
+export const UsersContainer = withAuthNavigate(connect(mapStateToProps, {
     setCurrentPage, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
-})(UsersAPI)
+})(UsersAPI))
