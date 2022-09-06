@@ -4,11 +4,13 @@ import {DialogItem} from "./DialogItem/DialogItme";
 import {Message} from "./Message/Message";
 import {MessageAvatars} from "./Message/MessageAvatars/MessageAvatars";
 import {DialogsPageType} from "../redux/redux-store";
+import {Navigate} from "react-router-dom";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
     dialogsPage: DialogsPageType
+    isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsType) => {
@@ -19,7 +21,6 @@ export const Dialogs = (props: DialogsType) => {
     const messagesElems = state.messages.map(m => <Message key={m.id} message={m.message}/>)
     const newMessageBody = state.newMessageBody
 
-
     const onSendMessageClick = () => {
         props.sendMessage()
     }
@@ -27,6 +28,9 @@ export const Dialogs = (props: DialogsType) => {
         let body = e.target.value;
         props.updateNewMessageBody(body)
     }
+
+    if (!props.isAuth) return <Navigate to={'/login'}/>
+
     return (
         <div className={s.dialogs}>
             <MessageAvatars/>

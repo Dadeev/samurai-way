@@ -4,10 +4,11 @@ import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {getUserProfile} from "../redux/profile-reducer";
 import {ProfileType} from "./PropfileInfo/PropfileInfo";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 type mapStateToPropsType = {
     profile: ProfileType
+    isAuth: boolean
 }
 
 type RouterType = {
@@ -29,6 +30,7 @@ type ProfileContainerType = {
     profile: ProfileType
     router: RouterType
     getUserProfile: (userId: string) => void
+    isAuth: boolean
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
@@ -37,6 +39,8 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 
     render() {
+        if (!this.props.isAuth) return <Navigate to={'/login'}/>
+
         return (
             <div>
                 <Profile profile={this.props.profile}/>
@@ -44,7 +48,6 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         )
     }
 }
-
 
 function withRouter(Component: any) {
     function ComponentWithRouterProp(props: any) {
@@ -62,9 +65,9 @@ function withRouter(Component: any) {
     return ComponentWithRouterProp;
 }
 
-
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 export default connect(mapStateToProps, {getUserProfile})(withRouter(ProfileContainer))
