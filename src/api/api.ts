@@ -6,16 +6,13 @@ const instance = axios.create({
     headers: {'API-KEY': '01aa801c-2a8e-4bdc-82d2-9950462da9ea'}
 })
 
-export const commonAPI = {
+export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`,)
             .then(response => response.data)
     },
-    getAuth() {
-        return instance.get(`auth/me`,).then(response => response.data)
-    },
     getProfile(userId: string) {
-        return axios.get(`profile/` + userId)
+        return instance.get(`profile/` + userId)
             .then(response => response.data)
     },
     getUnFollow(id: number) {
@@ -25,5 +22,10 @@ export const commonAPI = {
     getFollow(id: number) {
         return instance.post(`follow/${id}`, {},)
             .then(response => response.data)
+    }
+}
+export const authAPI = {
+    getAuth() {
+        return instance.get(`auth/me`,).then(response => response.data)
     }
 }

@@ -1,5 +1,5 @@
 import {ActionsTypes} from "./redux-store";
-import {commonAPI} from "../../api/api";
+import {usersAPI} from "../../api/api";
 import {Dispatch} from "redux";
 
 const FOLLOW = "FOLLOW";
@@ -87,7 +87,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setToggleFetching(true))
-        commonAPI.getUsers(currentPage, pageSize)
+        usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
                 dispatch(setToggleFetching(false))
                 dispatch(setUsers(data.items))
@@ -100,7 +100,7 @@ export const getUsersWithoutTotalUsersCount = (pageNumber: number, pageSize: num
     return (dispatch: Dispatch) => {
         dispatch(setToggleFetching(true))
         dispatch(setCurrentPage(pageNumber))
-        commonAPI.getUsers(pageNumber, pageSize)
+        usersAPI.getUsers(pageNumber, pageSize)
             .then(data => {
                 dispatch(setToggleFetching(false))
                 dispatch(setUsers(data.items))
@@ -111,7 +111,7 @@ export const getUsersWithoutTotalUsersCount = (pageNumber: number, pageSize: num
 export const follow = (userId: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
-        commonAPI.getFollow(userId)
+        usersAPI.getFollow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(followSuccess(userId))
@@ -124,7 +124,7 @@ export const follow = (userId: number) => {
 export const unFollow = (userId: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
-        commonAPI.getUnFollow(userId)
+        usersAPI.getUnFollow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(unfollowSuccess(userId))
