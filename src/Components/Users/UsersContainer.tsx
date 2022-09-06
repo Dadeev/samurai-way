@@ -2,31 +2,24 @@ import React from 'react'
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
 import {
-    follow,
-    setCurrentPage, setToggleFetching,
-    setUsers,
-    setTotalUsersCount,
-    unfollow,
-    UserType, toggleFollowingProgress
+    setCurrentPage,
+    UserType, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
 } from "../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {commonAPI} from "../../api/api";
 
 type UserAPIPropsType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
     isFetching: boolean
-    setToggleFetching: (isFetching: boolean) => void
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     followingProgress: number[]
+    getUsers: (currentPage: number, pageSize: number) => void
+    getUsersWithoutTotalUsersCount: (pageNumber: number, pageSize: number) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
 }
 
 class UsersAPI extends React.Component<UserAPIPropsType> {
@@ -55,23 +48,11 @@ class UsersAPI extends React.Component<UserAPIPropsType> {
     //         location: {city: 'Kiev', country: 'Ukraine'}
     //     }
     componentDidMount() {
-        this.props.setToggleFetching(true)
-        commonAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setToggleFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setToggleFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        commonAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.setToggleFetching(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsersWithoutTotalUsersCount(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -82,11 +63,10 @@ class UsersAPI extends React.Component<UserAPIPropsType> {
                    onPageChanged={this.onPageChanged}
                    currentPage={this.props.currentPage}
                    pageSize={this.props.pageSize}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingProgress={this.props.followingProgress}
                    isFetching={this.props.isFetching}
+                   follow={this.props.follow}
+                   unFollow={this.props.unFollow}
             />
         </>
     }
@@ -110,6 +90,5 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
 })
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow, unfollow, setUsers,
-    setCurrentPage, setTotalUsersCount, setToggleFetching, toggleFollowingProgress
+    setCurrentPage, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
 })(UsersAPI)

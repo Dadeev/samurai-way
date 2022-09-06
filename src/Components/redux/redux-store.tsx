@@ -1,18 +1,19 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {addPostAC, setUserProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setToggleFetching,
     setUsers,
     setTotalUsersCount,
-    unfollow,
-    usersReducer, ProfileUsersType, toggleFollowingProgress
+    unfollowSuccess,
+    usersReducer, toggleFollowingProgress
 } from "./users-reducer";
 import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
 import {authReducer, setAuthUserData} from "./auth-reducer";
+import thunkMiddleware from 'redux-thunk'
 
 export type postDataType = {
     id: number
@@ -56,8 +57,8 @@ export type ActionsTypes =
     | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
@@ -76,7 +77,7 @@ let reducers = combineReducers({
 
 export type RootStateType = ReturnType<typeof store.getState>
 
-export let store = createStore(reducers)
+export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 // @ts-ignore
 window.store = store
