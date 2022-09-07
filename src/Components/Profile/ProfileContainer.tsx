@@ -6,6 +6,7 @@ import {getUserProfile} from "../redux/profile-reducer";
 import {ProfileType} from "./PropfileInfo/PropfileInfo";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthNavigate} from "../hoc/withAuthNavigate";
+import {compose} from "redux";
 
 type mapStateToPropsType = {
     profile: ProfileType
@@ -48,9 +49,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 }
 
-const AuthNavigateComponent = withAuthNavigate(ProfileContainer)
-
-function withRouter(Component: any) {
+function withRouter(Component: React.ComponentType) {
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -67,7 +66,11 @@ function withRouter(Component: any) {
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
-    profile: state.profilePage.profile,
+    profile: state.profilePage.profile
 })
 
-export default connect(mapStateToProps, {getUserProfile})(withRouter(AuthNavigateComponent))
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthNavigate
+)(ProfileContainer)

@@ -8,6 +8,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthNavigate} from "../hoc/withAuthNavigate";
+import {compose} from "redux";
 
 type UserAPIPropsType = {
     users: UserType[]
@@ -24,30 +25,6 @@ type UserAPIPropsType = {
 }
 
 class UsersAPI extends React.Component<UserAPIPropsType> {
-    //     [{
-    //     id: 1,
-    //     photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',
-    //     followed: false,
-    //     fullName: 'Dima',
-    //     status: 'Im a boss',
-    //     location: {city: 'Minsk', country: 'Belarus'}
-    // },
-    //     {
-    //         id: 2,
-    //         photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',
-    //         followed: true,
-    //         fullName: 'Andrew',
-    //         status: 'Im a boss too',
-    //         location: {city: 'Moscow', country: 'Russia'}
-    //     },
-    //     {
-    //         id: 3,
-    //         photoUrl: 'https://services.tineye.com/source_image/03520dc3fba18a3b023872f037e3d564312af072',
-    //         followed: false,
-    //         fullName: 'Sasha',
-    //         status: 'Im a boss too',
-    //         location: {city: 'Kiev', country: 'Ukraine'}
-    //     }
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -90,6 +67,10 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
     followingProgress: state.usersPage.followingProgress
 })
 
-export const UsersContainer = withAuthNavigate(connect(mapStateToProps, {
-    setCurrentPage, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
-})(UsersAPI))
+
+export const UsersContainer = compose<React.ComponentType>(
+    withAuthNavigate,
+    connect(mapStateToProps, {
+        setCurrentPage, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
+    })
+)(UsersAPI)

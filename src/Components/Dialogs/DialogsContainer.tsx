@@ -1,6 +1,6 @@
 import React from 'react'
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-reducer";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
 import {DialogsPageType, RootStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
     }
 })
 
-const AuthNavigateComponent = withAuthNavigate(Dialogs)
-
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthNavigateComponent)
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthNavigate
+)(Dialogs)
