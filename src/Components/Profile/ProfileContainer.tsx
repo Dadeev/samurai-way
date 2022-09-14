@@ -2,15 +2,11 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {RootStateType} from "../redux/redux-store";
-import {getUserProfile} from "../redux/profile-reducer";
+import {getStatus, getUserProfile, updateStatus} from "../redux/profile-reducer";
 import {ProfileType} from "./PropfileInfo/PropfileInfo";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthNavigate} from "../hoc/withAuthNavigate";
 import {compose} from "redux";
-
-type mapStateToPropsType = {
-    profile: ProfileType
-}
 
 type RouterType = {
     location: {
@@ -32,18 +28,25 @@ type ProfileContainerType = {
     router: RouterType
     getUserProfile: (userId: string) => void
     isAuth: boolean
+    getStatus: (userId: string) => void
+    updateStatus: (status: string) => void
+    status: string
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
     componentDidMount() {
-        this.props.getUserProfile(this.props.router.params.userId)
+        const userId = this.props.router.params.userId;
+        this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
 
         return (
             <div>
-                <Profile profile={this.props.profile}/>
+                <Profile profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -65,12 +68,18 @@ function withRouter(Component: React.ComponentType) {
     return ComponentWithRouterProp;
 }
 
+type mapStateToPropsType = {
+    profile: ProfileType,
+    status: string
+}
+
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     withAuthNavigate
 )(ProfileContainer)

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, setUserProfile, UpdateNewPostTextAC} from "./profile-reducer";
+import profileReducer, {addPostAC, setStatus, setUserProfile, UpdateNewPostTextAC} from "./profile-reducer";
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
@@ -41,6 +41,7 @@ export type ProfilePageType = {
     posts: postDataType[]
     newPostText: string
     profile: ProfileType
+    status: string
 }
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
@@ -66,6 +67,8 @@ export type ActionsTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
+
 
 let reducers = combineReducers({
     profilePage: profileReducer,
