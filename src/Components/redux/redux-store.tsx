@@ -14,6 +14,7 @@ import {
 import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
 import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
+import {reducer as formReducer} from "redux-form";
 
 export type postDataType = {
     id: number
@@ -75,7 +76,8 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     siteBarPage: sidebarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export type RootStateType = ReturnType<typeof store.getState>
