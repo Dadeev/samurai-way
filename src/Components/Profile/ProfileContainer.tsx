@@ -35,7 +35,10 @@ type ProfileContainerType = {
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
     componentDidMount() {
-        const userId = this.props.router.params.userId;
+        let userId = this.props.router.params.userId;
+        if (userId === undefined) {
+            userId = String(25347)
+        }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }
