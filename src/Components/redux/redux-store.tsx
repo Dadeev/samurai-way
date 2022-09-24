@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, setStatus, setUserProfile, UpdateNewPostTextAC} from "./profile-reducer";
-import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import profileReducer, {addPostAC, setStatus, setUserProfile} from "./profile-reducer";
+import dialogsReducer, {sendMessageCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {
     followSuccess,
@@ -40,14 +40,12 @@ export type newFriendsNamesType = {
 
 export type ProfilePageType = {
     posts: postDataType[]
-    newPostText: string
     profile: ProfileType
     status: string
 }
 export type DialogsPageType = {
     dialogs: dialogsDataType[]
     messages: messagesDataType[]
-    newMessageBody: string
 }
 export type siteBarPageType = {
     newFriendsAvatars: newFriendsAvatarsType[]
@@ -56,9 +54,7 @@ export type siteBarPageType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
