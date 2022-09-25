@@ -1,10 +1,12 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItme";
 import {Message} from "./Message/Message";
 import {MessageAvatars} from "./Message/MessageAvatars/MessageAvatars";
 import {DialogsPageType} from "../redux/redux-store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {FormControl} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validator";
 
 type DialogsType = {
     updateNewMessageBody: (body: string) => void
@@ -42,11 +44,15 @@ export type AddMessageFormType = {
     newMessageBody: string
 }
 
+const maxLength10 = maxLengthCreator(10)
+const minLength1 = minLengthCreator(1)
+
 const AddMessageForm = (props: InjectedFormProps<AddMessageFormType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+                <Field component={FormControl} name={'newMessageBody'} placeholder={'Enter your message'} type={'textarea'}
+                       validate={[required, maxLength10, minLength1]}/>
             </div>
             <div>
                 <button>Send</button>
