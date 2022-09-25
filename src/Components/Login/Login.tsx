@@ -2,11 +2,24 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validator";
+import {connect} from "react-redux";
+import {login} from "../redux/auth-reducer";
+import {Navigate} from "react-router-dom";
+import {RootStateType} from "../redux/redux-store";
 
-export const Login = () => {
+type LoginType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
+
+const Login = ({isAuth, ...props}: LoginType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
+    if (isAuth) {
+        return <Navigate to={'/profile'}/>
+    }
+
     return (
         <div>
             <h2>Login</h2>
@@ -14,9 +27,13 @@ export const Login = () => {
         </div>
     );
 };
+const mapStateToProps = (state: RootStateType) => ({
+    isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {login})(Login)
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -29,15 +46,15 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
         <>
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field placeholder={'Login'} name={'login'} component={FormControl}
-                           validate={[required, maxLength10, minLength1]} type={'input'}/>
+                    <Field placeholder={'Email'} name={'email'} component={FormControl}
+                           validate={[required]} type={'input'}/>
                 </div>
                 <div>
                     <Field placeholder={'Password'} name={'password'} component={FormControl} type={'input'}
-                           validate={[required, maxLength10, minLength1]}/>
+                           validate={[required]}/>
                 </div>
                 <div>
-                    <Field type={'checkbox'} name={'rememberMe'} component={'checkbox'}/> remember me
+                    <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
                 </div>
                 <div>
                     <button>Login</button>
