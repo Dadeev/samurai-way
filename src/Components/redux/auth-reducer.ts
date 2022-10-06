@@ -39,16 +39,14 @@ export const setAuthUserData = (
     isAuth: boolean
 ) => ({type: SET_USER_DATA, data: {id, login, email, isAuth}} as const)
 
-export const getAuthUserData = () => {
-    return (dispatch: Dispatch) => {
-        authAPI.getAuth()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, login, email} = data.data
-                    dispatch(setAuthUserData(id, login, email, true))
-                }
-            })
-    }
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    return authAPI.getAuth()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data
+                dispatch(setAuthUserData(id, login, email, true))
+            }
+        })
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => {

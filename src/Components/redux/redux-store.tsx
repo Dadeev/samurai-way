@@ -15,6 +15,7 @@ import {ProfileType} from "../Profile/PropfileInfo/PropfileInfo";
 import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
 import {reducer as formReducer} from "redux-form";
+import {appReducer, initializeSuccess} from "./app-reducer";
 
 export type postDataType = {
     id: number
@@ -65,6 +66,8 @@ export type ActionsTypes =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof initializeSuccess>
+
 
 
 let reducers = combineReducers({
@@ -73,7 +76,8 @@ let reducers = combineReducers({
     siteBarPage: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 })
 
 export type RootStateType = ReturnType<typeof store.getState>

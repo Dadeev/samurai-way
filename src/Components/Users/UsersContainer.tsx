@@ -69,7 +69,6 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => ({
 
 
 export const UsersContainer = compose<React.ComponentType>(
-    withAuthNavigate,
     connect(mapStateToProps, {
         setCurrentPage, getUsers, getUsersWithoutTotalUsersCount, follow, unFollow
     })

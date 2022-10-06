@@ -12,7 +12,7 @@ type RouterType = {
     location: {
         hash: string
         key: string
-        pathname: string
+        pathname: any
         search: string
         state: null | boolean
     }
@@ -32,6 +32,7 @@ type ProfileContainerType = {
     updateStatus: (status: string) => void
     status: string
     authorizedUserId: number
+
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
@@ -39,6 +40,9 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
         let userId = this.props.router.params.userId;
         if (userId === undefined) {
             userId = String(this.props.authorizedUserId)
+            if (!userId) {
+                return this.props.router.location.pathname.push('/login')
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -56,7 +60,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 }
 
-function withRouter(Component: React.ComponentType) {
+export function withRouter(Component: React.ComponentType) {
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
